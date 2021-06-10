@@ -1,4 +1,4 @@
-package user
+package users
 
 import (
 	"strings"
@@ -12,11 +12,13 @@ type User struct {
 	LastName     string `json:"last_name"`
 	Email        string `json:"email"`
 	Date_Created string `json:"date_created"`
+	Status       string `json:"status"`
+	Password     string `json:"-"`
 }
 
-func (user *User) Validate() *errors.RestErr {
-	user.Email = strings.TrimSpace(strings.ToLower(user.Email))
-	if user.Email == "" {
+func (users *User) Validate() *errors.RestErr {
+	users.Email = strings.TrimSpace(strings.ToLower(users.Email))
+	if users.Email == "" {
 		return errors.NewBadRequestError("invalid email")
 	}
 	return nil
